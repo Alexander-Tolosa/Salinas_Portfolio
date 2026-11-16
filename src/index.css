@@ -1,0 +1,125 @@
+@layer theme, base, bootstrap, components, utilities;
+@import "tailwindcss";
+@import "bootstrap/dist/css/bootstrap.min.css" layer(bootstrap);
+@import "tw-animate-css";
+@import "@fontsource/instrument-serif/400.css";
+@import "@fontsource/instrument-serif/400-italic.css";
+@import "@fontsource-variable/schibsted-grotesk";
+@import "@fontsource-variable/jetbrains-mono";
+
+/* The Field Catalogue: warm paper, ink, one signal accent (see DESIGN.md) */
+:root {
+  --paper: oklch(0.955 0.014 85);
+  --paper-2: oklch(0.925 0.018 82);
+  --ink: oklch(0.22 0.02 60);
+  --ink-soft: oklch(0.42 0.02 60);
+  --rule: oklch(0.80 0.02 80);
+  --signal: oklch(0.60 0.19 38);
+  --signal-text: oklch(0.50 0.18 38);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* shadcn tokens mapped to the catalogue palette */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--signal);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --muted: var(--paper-2);
+  --muted-foreground: var(--ink-soft);
+  --radius: 0.25rem;
+
+  /* Bootstrap variable overrides */
+  --bs-body-bg: var(--paper);
+  --bs-body-color: var(--ink);
+  --bs-body-font-family: 'Schibsted Grotesk Variable', system-ui, sans-serif;
+  --bs-body-font-size: 1.0625rem;
+  --bs-border-color: var(--rule);
+  --bs-link-color: var(--signal-text);
+  --bs-link-hover-color: var(--ink);
+  --bs-border-radius: 2px;
+}
+
+@theme inline {
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Schibsted Grotesk Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-rule: var(--rule);
+  --color-signal: var(--signal);
+  --color-signal-text: var(--signal-text);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; background: var(--paper); }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-wrap: pretty;
+  }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.02em; line-height: 0.98; text-wrap: balance; color: var(--ink); }
+  ::selection { background: var(--signal-text); color: var(--paper); }
+  input, textarea { caret-color: var(--signal); }
+  :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+  * { scrollbar-color: var(--ink-soft) var(--paper-2); }
+  a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+  .tabular { font-variant-numeric: tabular-nums; }
+}
+
+@layer components {
+  a:not([class]) { color: var(--signal-text); }
+  a:not([class]):hover { color: var(--ink); }
+  .mono-label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); }
+  .rule-row { border-top: 1px solid var(--rule); }
+  .skip-link { position: absolute; left: 1rem; top: -4rem; background: var(--ink); color: var(--paper); padding: .6rem 1rem; z-index: 100; transition: top .2s var(--ease-out); }
+  .skip-link:focus { top: 1rem; }
+
+  /* Bootstrap re-skins: flat, hairline, no shadows */
+  .navbar { --bs-navbar-padding-y: 1rem; background: color-mix(in oklab, var(--paper) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+  .navbar .nav-link { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft); padding: .75rem 0 !important; margin-inline: 1.25rem 0; position: relative; }
+  .navbar .nav-link:hover { color: var(--ink); }
+  .navbar .nav-link.active { color: var(--ink); }
+  .navbar .nav-link.active::after { content: ""; position: absolute; left: 0; right: 0; bottom: .35rem; height: 2px; background: var(--signal); }
+  .navbar-toggler { border: 1px solid var(--ink); border-radius: 2px; min-width: 44px; min-height: 44px; }
+  .navbar-toggler:focus { box-shadow: none; }
+
+  .btn { border-radius: 2px; font-weight: 600; letter-spacing: .01em; padding: .8rem 1.4rem; min-height: 44px; transition: background-color .2s var(--ease-out), color .2s var(--ease-out), transform .2s var(--ease-out); }
+  .btn-ink { --bs-btn-color: var(--paper); --bs-btn-bg: var(--ink); --bs-btn-border-color: var(--ink); --bs-btn-hover-color: var(--paper); --bs-btn-hover-bg: var(--signal-text); --bs-btn-hover-border-color: var(--signal-text); --bs-btn-active-bg: var(--signal-text); --bs-btn-active-border-color: var(--signal-text); --bs-btn-active-color: var(--paper); }
+  .btn-line { --bs-btn-color: var(--ink); --bs-btn-bg: transparent; --bs-btn-border-color: var(--ink); --bs-btn-hover-color: var(--paper); --bs-btn-hover-bg: var(--ink); --bs-btn-hover-border-color: var(--ink); --bs-btn-active-bg: var(--ink); --bs-btn-active-color: var(--paper); }
+
+  .card { --bs-card-bg: transparent; --bs-card-border-color: var(--rule); --bs-card-border-radius: 2px; --bs-card-cap-bg: transparent; box-shadow: none; }
+  .accordion { --bs-accordion-bg: transparent; --bs-accordion-border-color: var(--rule); --bs-accordion-border-radius: 0; --bs-accordion-inner-border-radius: 0; --bs-accordion-btn-bg: transparent; --bs-accordion-active-bg: transparent; --bs-accordion-active-color: var(--ink); --bs-accordion-btn-focus-box-shadow: none; --bs-accordion-btn-padding-y: 1.4rem; --bs-accordion-btn-padding-x: 0; --bs-accordion-body-padding-x: 0; }
+  .accordion-button { font-family: var(--font-display); font-size: clamp(1.4rem, 2.4vw, 1.9rem); letter-spacing: -0.01em; box-shadow: none !important; }
+  .accordion-button:not(.collapsed) { color: var(--signal-text); }
+  .accordion-item { border-left: 0; border-right: 0; }
+  .badge { border-radius: 2px; font-family: var(--font-mono); font-weight: 500; font-size: .75rem; letter-spacing: .02em; padding: .45em .7em; }
+  .badge-chip { background: transparent; color: var(--ink); border: 1px solid var(--rule); }
+  .form-control { border-radius: 2px; border-color: var(--ink); background: transparent; padding: .8rem .9rem; min-height: 44px; }
+  .form-control:focus { border-color: var(--signal-text); box-shadow: 0 0 0 3px color-mix(in oklab, var(--signal) 30%, transparent); background: transparent; }
+  .form-label { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft); }
+  .alert { border-radius: 2px; }
+  .list-group { --bs-list-group-action-color: var(--ink); --bs-list-group-action-hover-color: var(--ink); --bs-list-group-action-hover-bg: var(--paper-2); --bs-list-group-color: var(--ink); --bs-list-group-bg: transparent; --bs-list-group-border-color: var(--rule); --bs-list-group-border-radius: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn, .skip-link { transition-property: background-color, color; }
+}

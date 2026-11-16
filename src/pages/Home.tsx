@@ -63,7 +63,7 @@ export default function Home() {
               </p>
             </Col>
             <Col lg={5} className="order-1 order-lg-2">
-              <figure data-portrait className="m-0 mx-auto max-w-[380px] lg:ms-auto lg:me-0">
+              <figure data-portrait className="m-0 mx-auto ms-lg-auto me-lg-0 max-w-[380px]">
                 <Portrait src={profile.photo} alt={`Portrait of ${profile.name} holding a laptop`} initials="AS" />
                 <figcaption className="mono-label mt-3 d-flex justify-content-between">
                   <span>Fig. 1</span>

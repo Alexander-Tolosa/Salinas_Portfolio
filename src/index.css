@@ -4,7 +4,7 @@
 @import "tw-animate-css";
 @import "@fontsource/instrument-serif/400.css";
 @import "@fontsource/instrument-serif/400-italic.css";
-@import "@fontsource-variable/instrument-sans";
+@import "@fontsource-variable/schibsted-grotesk";
 @import "@fontsource-variable/jetbrains-mono";
 
 /* The Field Catalogue: warm paper, ink, one signal accent (see DESIGN.md) */
@@ -33,7 +33,7 @@
   /* Bootstrap variable overrides */
   --bs-body-bg: var(--paper);
   --bs-body-color: var(--ink);
-  --bs-body-font-family: 'Instrument Sans Variable', system-ui, sans-serif;
+  --bs-body-font-family: 'Schibsted Grotesk Variable', system-ui, sans-serif;
   --bs-body-font-size: 1.0625rem;
   --bs-border-color: var(--rule);
   --bs-link-color: var(--signal-text);
@@ -43,7 +43,7 @@
 
 @theme inline {
   --font-display: 'Instrument Serif', Georgia, serif;
-  --font-sans: 'Instrument Sans Variable', system-ui, sans-serif;
+  --font-sans: 'Schibsted Grotesk Variable', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
   --color-paper: var(--paper);
   --color-paper-2: var(--paper-2);
@@ -76,7 +76,7 @@
     text-wrap: pretty;
   }
   h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.02em; line-height: 0.98; text-wrap: balance; color: var(--ink); }
-  ::selection { background: var(--signal); color: var(--paper); }
+  ::selection { background: var(--signal-text); color: var(--paper); }
   input, textarea { caret-color: var(--signal); }
   :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
   * { scrollbar-color: var(--ink-soft) var(--paper-2); }
@@ -98,7 +98,7 @@
   .navbar .nav-link:hover { color: var(--ink); }
   .navbar .nav-link.active { color: var(--ink); }
   .navbar .nav-link.active::after { content: ""; position: absolute; left: 0; right: 0; bottom: .35rem; height: 2px; background: var(--signal); }
-  .navbar-toggler { border: 1px solid var(--ink); border-radius: 2px; }
+  .navbar-toggler { border: 1px solid var(--ink); border-radius: 2px; min-width: 44px; min-height: 44px; }
   .navbar-toggler:focus { box-shadow: none; }
 
   .btn { border-radius: 2px; font-weight: 600; letter-spacing: .01em; padding: .8rem 1.4rem; min-height: 44px; transition: background-color .2s var(--ease-out), color .2s var(--ease-out), transform .2s var(--ease-out); }
@@ -121,5 +121,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  .btn, .skip-link { transition-property: background-color, color; }
 }

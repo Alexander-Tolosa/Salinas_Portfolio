@@ -5,5 +5,6 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  resolve: { alias: { '@': path.resolve(import.meta.dirname, 'src') } },
+  optimizeDeps: { include: ['react-router', 'react-router/dom'] },
+  resolve: { dedupe: ['react', 'react-dom', 'react-router'], alias: { '@': path.resolve(import.meta.dirname, 'src') } },
 })
